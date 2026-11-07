@@ -9,7 +9,7 @@ interface Errors {
 }
 
 const field =
-  "mt-1.5 w-full rounded-md border-2 border-line bg-white px-3.5 py-2.5 text-[0.95rem] text-ink placeholder:text-ink-muted/70 focus:border-green-deep focus:shadow-none focus:outline-none";
+  "mt-1.5 w-full rounded-md border-2 border-line bg-white px-3.5 py-2.5 text-body text-ink placeholder:text-ink-muted/70 focus:border-green-deep focus:shadow-none focus:outline-none";
 
 /**
  * Short message form that opens the visitor's mail app with the message
@@ -124,7 +124,7 @@ export default function ContactForm() {
       <div className="flex flex-wrap items-center gap-4">
         <button
           type="submit"
-          className="inline-flex min-h-[44px] items-center justify-center rounded-md bg-green-deep px-5 py-2.5 text-[0.95rem] font-semibold text-cream transition-colors hover:bg-green-deeper"
+          className="inline-flex min-h-[44px] items-center justify-center rounded-md bg-green-deep px-5 py-2.5 text-body font-semibold text-cream transition-colors hover:bg-green-deeper"
         >
           Open in your mail app
         </button>

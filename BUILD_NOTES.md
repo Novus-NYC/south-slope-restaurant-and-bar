@@ -19,6 +19,8 @@ Graph image.
 | Rating | 4.8, 1,000+ ratings, shown as "on Uber Eats" | Uber Eats (not placed in JSON-LD because it is a third party figure) |
 | Reviews quoted | Candi W., July 20, 2023; Iteyana H., June 22, 2023 | Uber Eats written reviews, quoted verbatim with first name and date |
 | Cuisine | American, Breakfast and Brunch, Diner, Burgers, Sandwiches | Uber Eats and Restaurantji tags |
+| Breakfast hours | Not verified. The site says "breakfast, lunch and dinner from 9:00 AM" (derived from the hours) and never "all day" or "until close" | The chalkboard's "Served ALL DAY" line sits beside coffee and tea, so it is ambiguous |
+| Outdoor seating | Not verified as current. Described as the photo it is ("Pictured: ...", "Ask about a table outside") and left out of metadata | Undated photo from the old Wix gallery |
 | Socials | none | None found on the old site; `null` in config, no icons rendered |
 | Founding date, legal name, price range | unknown | `null` in config; nothing shown |
 
@@ -71,8 +73,9 @@ everywhere.
   four plain facts, green hours and address block with directions, call and both ordering links,
   the Uber Eats 4.8 with two attributed quotes, closing CTA band.
 - `/menu`: 22 categories in three parts (Breakfast; Lunch & Dinner; Drinks & Bar), a sticky category
-  jump bar under the header (horizontal scroll at every width, active chip tracks the scroll
-  position), category notes beside each list, vegan and vegetarian text badges, prices right aligned
+  jump bar under the header (one scrolling row below 768 px, wrapped rows from 768 px up, 44 px
+  targets, active chip tracks the scroll position, the bar writes its measured height into
+  `--jump-h`), category notes beside each list, vegan and vegetarian text badges, prices right aligned
   with `flex` so they survive 390 px, two-column layout for short lists, a "Seasonal and party
   platters" box at the end with an availability note, and an order CTA.
 - `/about`: intro with "also known as South Slope Eatery", a wide crop of the outdoor photo, the
@@ -118,13 +121,32 @@ everywhere.
   Cheese", "Huevos Ala Mexicana", "Penne Ala Vodka" kept as the restaurant writes them.
 - Anchor offset: one `scroll-padding-top` on `html` equal to the header height; on the menu page it
   grows by the jump bar height through `html:has(#menu-jump-bar)`. No per-section `scroll-margin`.
+  `--jump-h` has CSS fallbacks (3.25rem, 6.5rem from 768 px) and the bar overwrites it with its
+  measured height once JavaScript runs, so the offset stays right when the chips wrap.
+- Focus ring: a 3 px deep green outline with a 2 px cream inner halo on light surfaces; `.board`,
+  `.bg-green-deep` and the mobile dialog swap to leaf green on charcoal. Both pass 3:1 against
+  their canvas. Contact inputs keep their border color change instead.
+- Mobile navigation: while the panel is open the skip link, header, main and footer carry `inert`,
+  so Tab stays inside the dialog; Escape closes it and focus returns to the toggle after inert is
+  removed. The toggle is labelled "Pages" (not "Menu") so it does not collide with the food menu.
+- Storefront photo: the original JPEG carries a baked-in white vignette frame (about 24 px on the
+  straight edges, deeper at the rounded corners). The file is untouched (byte for byte rule); the
+  `<Image>` is scaled 1.07 with transform origin 56% so the frame falls outside the crop while
+  "486" and the phone number on the awning stay whole. Ask the owner for a clean original.
+- Cocktail board image: the source has white margins down both sides and a script title across the
+  top. It is shown in a 3:2 box scaled 1.275 and positioned so the crop starts under the title and
+  ends between two rows of labels; only glasses and whole labels are in frame.
+- Ordering labels come from `site.ordering[].shortLabel` ("Pickup or delivery", "Uber Eats")
+  wherever both channels are listed; `label` is the button text ("Order Online").
 - The JS class is added by an inline script that is the first child of `<body>`, so reveals are
   hidden only when JavaScript runs; `<html>` has `suppressHydrationWarning` for that class.
 - No map embed (sandbox risk); directions go to Google Maps with the address URL-encoded. A map
   embed is a post-deploy option.
 - `turbopack.root` is set in `next.config.ts` because a stray `package-lock.json` in the Windows user
   folder made Next guess the wrong workspace root.
-- `eslint-config-next` is pinned to the installed Next version (16.1.6).
+- `next` (16.1.6), `react` and `react-dom` (19.2.4) are pinned to the installed versions in
+  `package.json`, and `eslint-config-next` is pinned to the same Next version, so a lockfile
+  regeneration cannot jump Next a major.
 
 ## 5. Verification done
 
@@ -192,12 +214,22 @@ category note), Iced Lavender, Guava and Mango Matcha Lattes, Bulldog and most c
 - Salad add-ons: text says avocado +2.75; image says +3 and also lists tofu, tuna, fresh turkey +5 and
   rib eye +8. Text version shown.
 - Wings: text lists 6 pc $11.95 and 12 pc $21.95; shown as one line with both.
-- Mozzarella Sticks, Mac 'N' Cheese and similar were tagged vegetarian by reading the ingredients;
-  Hot Oatmeal, Fresh Fruit Salad, Avocado Toast, Primavera Salad, Vegetarian Pita Sandwich,
-  Spinach Lentil soup, Smurf, Very Berry, Mango Tango, Peach Passion, Maui Maui and the fries and
-  vegetable sides were tagged vegan by ingredients. The Beyond Burger is tagged vegan as the text
-  menu says, with the image menu's note that the brioche bun is not vegan or gluten free. The owner
-  should confirm every tag; they are text badges and easy to change in `menu.ts`.
+- Vegan badges appear only on the items the text menu marks vegan (Guac & Chips, Home-Made
+  Hummus, Quinoa Wrap, The Beyond Burger, Teriyaki Rice Bowl, Super Protein Bowl, Vegan Bowl,
+  Quinoa Medley, The Natural Grain Bowl, Tofu Veggie Bowl) plus Super Vegan Quinoa Bowl, which is
+  vegan by name. The Beyond Burger keeps the image menu's note that the brioche bun is not vegan or
+  gluten free.
+- Items that had been tagged vegan by reading the ingredients were changed in the review pass:
+  downgraded to vegetarian (no meat, fish or poultry in the listed ingredients, but preparation
+  unknown): Hot Oatmeal, Fresh Fruit Salad, Primavera Salad, Protein Veggie Wrap, Tofu Veggie Wrap,
+  Vegetarian Pita Sandwich, Avocado Toast, French Fries, Waffle Fries, Sweet Potato Fries, Baked
+  Potato, Baked Sweet Potato, Steamed Brown Rice, Organic Quinoa, Sautéed Spinach, Sautéed
+  Broccoli, Steamed Mixed Veggies, Steamed Broccoli, Half Avocado, Smurf, Very Berry, Mango Tango,
+  Peach Passion, Maui Maui. Tag removed (nothing to go on, or a plain produce list where a badge
+  adds nothing): Seasoned Rice, Spinach Lentil soup, and all eleven fresh squeezed juices.
+  Mozzarella Sticks, Mac 'N' Cheese and similar remain tagged vegetarian by their ingredients. The
+  owner should confirm every tag; they are text badges and easy to change in `menu.ts`.
+- 50 Wings (Super Bowl special) is listed without a description; the sources give none.
 - The breakfast sandwiches category: the image says "served with home fries, choice of mixed
   greens"; the text menu has no such note, so none is shown.
 
@@ -296,3 +328,43 @@ owner can confirm the current prices in one pass.
     site; the 308 redirects for `/our-menu` and `/online-ordering-1` are already in place.
 13. Optional post-deploy: a Google Maps embed on the Contact page, and a reservations or catering
     line if the restaurant offers either.
+14. Is breakfast served all day, or until close? The old chalkboard is ambiguous, so the site only
+    says "breakfast, lunch and dinner from 9:00 AM". If the owner confirms all day breakfast, the
+    copy in `site.ts` (tagline, description), the home hero and facts, the menu intro, the footer
+    and the Open Graph image can say so again.
+15. Does the outdoor setup in the photo still operate, and in which months? The site describes the
+    photo and says "ask about a table outside"; confirm before promising outdoor seating anywhere.
+16. Confirm the vegan badges on the eleven items that carry them (section 6c), and whether any of
+    the items downgraded to vegetarian or untagged (oatmeal, avocado toast, fries, vegetable sides,
+    the fruit smoothies, the juices, Spinach Lentil soup) are in fact prepared vegan.
+17. A clean original of the storefront photo without the white vignette frame. The current file is
+    shown with a CSS crop that hides the frame; a frameless original would let the whole facade
+    show.
+
+## 8. Review fixes (2026-11-06)
+
+A reviewer checked the site against AGENTS.md after the first build. What changed:
+
+- Content: every "breakfast all day" / "until close" line became "breakfast, lunch and dinner from
+  9:00 AM" (time derived from `openingTime()` in `site.ts`); outdoor seating is described as the
+  photo and dropped from metadata and the ticker; vegan badges reduced to the sourced set (6c);
+  the invented 50 Wings description removed; "269 things on the menu, all made to order" no longer
+  claims canned drinks are made to order; "Inside, the black awning" corrected to "Above the door";
+  the Eatery name is described as current ("The awning still reads South Slope Eatery").
+- Accessibility: two tone focus ring (3:1 on cream, white and the dark boards); the mobile dialog
+  makes the rest of the page inert while open; the navigation toggle reads "Pages"; diet badges
+  are 12 px; the seasonal block's items are h3 under its h2; the featured list counts 1 to 5 with
+  the number hidden from screen readers (the `<ol>` already numbers it); the contact form posts
+  to `mailto:` without JavaScript and native validation is back.
+- Layout: hours cells never wrap; the footer is two columns at 768 px and twelve at 1024 px;
+  ordering cards stack until 1024 px; the Find us address steps down at 768 px; the menu category
+  bar wraps from 768 px with a measured height; the ticker is one scrolling line on phones with
+  no trailing bullet; the storefront and cocktail board crops are described in section 4.
+- Code: `fontSize.body` and `fontSize.eyebrow` / `letterSpacing.eyebrow` tokens replace
+  `text-[0.95rem]` and the five tracking variants; one `Eyebrow` component renders every section
+  label; `ButtonLink` renders `tel:` and `mailto:` links as plain anchors so the Call buttons
+  reuse it; ordering labels come from `shortLabel` in the config; dependencies are pinned.
+- Skipped on purpose: re-encoding or resizing any image (byte for byte rule), the hero eyebrow
+  treatment, the Contact page column balance, unifying h1 scales, moving the remaining facts
+  (the $10 minimum, the Uber Eats name) into the config, tokenizing the last few hex values, and
+  the brand string cleanup. They are nice-to-haves for a later pass.

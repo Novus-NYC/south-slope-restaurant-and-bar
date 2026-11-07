@@ -22,7 +22,7 @@ export default function OrderingLinks({ tone = "light", className = "" }: Orderi
             className={`flex min-h-[44px] flex-col rounded-md border-2 px-5 py-4 transition-colors ${card}`}
           >
             <span className="flex items-center justify-between font-display text-xl font-bold">
-              {order.id === "wix" ? "Pickup or delivery" : order.label}
+              {order.shortLabel}
               <span aria-hidden="true" className="text-green-leaf">
                 ↗
               </span>

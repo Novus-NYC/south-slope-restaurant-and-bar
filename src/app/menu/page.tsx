@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ButtonLink from "@/lib/components/button-link";
+import Eyebrow from "@/lib/components/eyebrow";
 import MenuJumpBar from "@/lib/components/menu-jump-bar";
 import Reveal from "@/lib/components/reveal";
 import { pageMetadata } from "@/lib/metadata";
@@ -100,7 +101,7 @@ export default function MenuPage() {
       <section className="mx-auto max-w-site px-4 pb-10 pt-12 sm:px-6 md:pb-14 md:pt-16">
         <div className="grid gap-8 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Menu</p>
+            <Eyebrow>Menu</Eyebrow>
             <h1 className="mt-3 font-display text-[2.6rem] font-bold leading-[0.98] sm:text-6xl md:text-7xl">
               Breakfast to
               <br />
@@ -116,12 +117,9 @@ export default function MenuPage() {
               {primaryOrder.label}
             </ButtonLink>
             {phone && site.phone ? (
-              <a
-                href={phone}
-                className="inline-flex min-h-[44px] items-center justify-center rounded-md border-2 border-charcoal px-5 py-2.5 text-[0.95rem] font-semibold transition-colors hover:bg-charcoal hover:text-cream"
-              >
+              <ButtonLink href={phone} variant="outline">
                 Call to order
-              </a>
+              </ButtonLink>
             ) : null}
           </div>
         </div>
@@ -134,14 +132,14 @@ export default function MenuPage() {
           <section key={section.id} id={section.id} className={sectionIndex === 0 ? "pt-10 md:pt-14" : "pt-16 md:pt-24"}>
             <Reveal className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">
+                <Eyebrow>
                   Part {sectionIndex + 1} of {menuSections.length}
-                </p>
+                </Eyebrow>
                 <h2 className="mt-2 font-display text-[2.2rem] font-bold leading-none sm:text-5xl">
                   {section.name}
                 </h2>
               </div>
-              <p className="max-w-md text-[0.95rem] text-ink-muted">{section.blurb}</p>
+              <p className="max-w-md text-body text-ink-muted">{section.blurb}</p>
             </Reveal>
             <div className="flex flex-col gap-12">
               {section.categories.map((category) => (

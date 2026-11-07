@@ -9,7 +9,7 @@ export default function HoursTable({ tone = "light", className = "" }: HoursTabl
   const border = tone === "dark" ? "border-cream/15" : "border-line";
   const muted = tone === "dark" ? "text-cream/70" : "text-ink-muted";
   return (
-    <table className={`w-full border-collapse text-[0.95rem] ${className}`}>
+    <table className={`w-full border-collapse text-body ${className}`}>
       <caption className="sr-only">Opening hours</caption>
       <tbody>
         {site.hours.map((row) => (

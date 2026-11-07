@@ -33,6 +33,15 @@ const config: Config = {
         display: ['"Fraunces Variable"', "Georgia", "serif"],
         sans: ['"Inter Variable"', "system-ui", "sans-serif"],
       },
+      fontSize: {
+        /** Secondary body copy: notes, ledes under facts, button labels. */
+        body: ["0.95rem", { lineHeight: "1.6" }],
+        /** Uppercase section labels, always with `tracking-eyebrow`. */
+        eyebrow: ["0.75rem", { lineHeight: "1rem" }],
+      },
+      letterSpacing: {
+        eyebrow: "0.2em",
+      },
       maxWidth: {
         site: "76rem",
       },

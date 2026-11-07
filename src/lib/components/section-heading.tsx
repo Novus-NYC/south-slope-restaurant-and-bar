@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Eyebrow from "@/lib/components/eyebrow";
 
 export interface SectionHeadingProps {
   eyebrow?: string;
@@ -19,13 +20,10 @@ export default function SectionHeading({
   as: Tag = "h2",
   className = "",
 }: SectionHeadingProps) {
-  const eyebrowColor = tone === "dark" ? "text-green-leaf" : "text-green-deep";
   const ledeColor = tone === "dark" ? "text-cream/80" : "text-ink-muted";
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} max-w-2xl ${className}`}>
-      {eyebrow ? (
-        <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${eyebrowColor}`}>{eyebrow}</p>
-      ) : null}
+      {eyebrow ? <Eyebrow tone={tone}>{eyebrow}</Eyebrow> : null}
       <Tag
         className={`mt-3 font-display text-[2rem] font-bold leading-[1.05] sm:text-[2.6rem] ${
           Tag === "h1" ? "md:text-[3.4rem]" : "md:text-[3rem]"

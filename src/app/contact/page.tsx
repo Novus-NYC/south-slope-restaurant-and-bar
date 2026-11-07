@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ButtonLink from "@/lib/components/button-link";
 import ContactForm from "@/lib/components/contact-form";
+import Eyebrow from "@/lib/components/eyebrow";
 import HoursTable from "@/lib/components/hours-table";
 import OrderingLinks from "@/lib/components/ordering-links";
 import Reveal from "@/lib/components/reveal";
@@ -33,7 +34,7 @@ export default function ContactPage() {
         <div className="grid gap-12 md:grid-cols-12">
           {/* Visit */}
           <Reveal className="md:col-span-5">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Visit</h2>
+            <Eyebrow as="h2">Visit</Eyebrow>
             <address className="mt-3 not-italic">
               <p className="font-display text-3xl font-bold leading-tight">{site.address.street}</p>
               <p className="mt-1 text-lg text-ink-muted">
@@ -50,7 +51,7 @@ export default function ContactPage() {
             <dl className="mt-10 flex flex-col gap-5">
               {phone && site.phone ? (
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Phone</dt>
+                  <Eyebrow as="dt">Phone</Eyebrow>
                   <dd className="mt-1">
                     <a href={phone} className="font-display text-2xl font-bold hover:text-green-deep">
                       {site.phone}
@@ -60,7 +61,7 @@ export default function ContactPage() {
               ) : null}
               {mail && site.email ? (
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Email</dt>
+                  <Eyebrow as="dt">Email</Eyebrow>
                   <dd className="mt-1">
                     <a href={mail} className="break-all text-lg font-semibold underline decoration-green-leaf decoration-2 underline-offset-4 hover:text-green-deep">
                       {site.email}
@@ -70,7 +71,9 @@ export default function ContactPage() {
               ) : null}
             </dl>
 
-            <h2 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Hours</h2>
+            <Eyebrow as="h2" className="mt-10">
+              Hours
+            </Eyebrow>
             <HoursTable className="mt-3 max-w-sm text-base" />
             <p className="mt-3 text-sm text-ink-muted">Holiday hours may differ; call ahead.</p>
           </Reveal>

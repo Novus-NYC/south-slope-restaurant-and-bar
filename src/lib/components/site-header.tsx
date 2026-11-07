@@ -113,7 +113,7 @@ export default function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive(link.href) ? "page" : undefined}
-                className={`inline-flex min-h-[44px] items-center rounded-md px-3 text-[0.95rem] font-semibold transition-colors hover:text-green-deep ${
+                className={`inline-flex min-h-[44px] items-center rounded-md px-3 text-body font-semibold transition-colors hover:text-green-deep ${
                   isActive(link.href) ? "text-green-deep underline decoration-2 underline-offset-8" : "text-charcoal"
                 }`}
               >
@@ -191,13 +191,9 @@ export default function SiteHeader() {
               {primaryOrder.label}
             </ButtonLink>
             {phone && site.phone ? (
-              <a
-                href={phone}
-                className="inline-flex min-h-[44px] items-center justify-center rounded-md border-2 border-cream/40 px-5 font-semibold"
-                onClick={() => close(false)}
-              >
+              <ButtonLink href={phone} variant="outline-light" onClick={() => close(false)}>
                 Call {site.phone}
-              </a>
+              </ButtonLink>
             ) : null}
           </div>
           <p className="mt-8 text-sm text-cream/70">

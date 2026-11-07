@@ -92,7 +92,7 @@ export default function MenuJumpBar({ sections }: MenuJumpBarProps) {
           <Fragment key={section.id}>
             <a
               href={`#${section.id}`}
-              className="mr-1 inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap rounded-md pl-1 pr-2 text-xs font-bold uppercase tracking-[0.16em] text-green-deep"
+              className="mr-1 inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap rounded-md pl-1 pr-2 text-eyebrow font-bold uppercase tracking-eyebrow text-green-deep"
             >
               {section.name}
             </a>

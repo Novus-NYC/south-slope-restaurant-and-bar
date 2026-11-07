@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ButtonLink from "@/lib/components/button-link";
+import Eyebrow from "@/lib/components/eyebrow";
 import HoursTable from "@/lib/components/hours-table";
 import RestaurantJsonLd from "@/lib/components/json-ld";
 import Reveal from "@/lib/components/reveal";
@@ -54,9 +55,9 @@ export default function HomePage() {
           className="absolute inset-0 bg-[linear-gradient(to_right,rgba(27,27,25,0.55)_0%,rgba(27,27,25,0)_60%)]"
         />
         <div className="relative mx-auto w-full max-w-site px-4 pb-12 pt-32 sm:px-6 md:pb-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green-leaf sm:text-sm">
+          <Eyebrow tone="dark" className="sm:text-sm">
             {site.address.street}, {site.address.city}
-          </p>
+          </Eyebrow>
           <h1 className="mt-4 max-w-3xl font-display text-[2.6rem] font-bold leading-[0.98] sm:text-6xl md:text-7xl">
             Your all day spot on 5th Avenue.
           </h1>
@@ -78,7 +79,7 @@ export default function HomePage() {
       {/* Chalkboard ticker: the brand cue from the restaurant's own boards. */}
       <section className="board border-y border-cream/10 py-3 text-green-leaf" aria-label="What we serve">
         {/* One scrolling line on phones, a centered wrapped row from sm up. */}
-        <ul className="scrollbar-none mx-auto flex max-w-site flex-nowrap gap-x-6 overflow-x-auto px-4 text-[0.8rem] font-bold uppercase tracking-[0.18em] sm:flex-wrap sm:justify-center sm:gap-y-1 sm:overflow-visible sm:px-6">
+        <ul className="scrollbar-none mx-auto flex max-w-site flex-nowrap gap-x-6 overflow-x-auto px-4 text-[0.8rem] font-bold uppercase tracking-eyebrow sm:flex-wrap sm:justify-center sm:gap-y-1 sm:overflow-visible sm:px-6">
           {tickerItems.map((item, index) => (
             <li key={item} className="flex shrink-0 items-center gap-6 whitespace-nowrap">
               {item}
@@ -137,11 +138,9 @@ export default function HomePage() {
                     ) : null}
                   </div>
                   <div className="mt-1.5 pl-8 sm:pl-9">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-green-deep">
-                      {category}
-                    </p>
+                    <Eyebrow>{category}</Eyebrow>
                     {item.description ? (
-                      <p className="mt-1 text-[0.95rem] text-ink-muted">{item.description}</p>
+                      <p className="mt-1 text-body text-ink-muted">{item.description}</p>
                     ) : null}
                   </div>
                 </Link>
@@ -181,19 +180,19 @@ export default function HomePage() {
             <ul className="mt-8 grid gap-4 sm:grid-cols-2">
               <li className="border-l-2 border-green-deep pl-4">
                 <p className="font-display text-xl font-bold">Open 7 days</p>
-                <p className="mt-1 text-[0.95rem] text-ink-muted">From {openingTime()} every morning, with breakfast, lunch and dinner on one menu.</p>
+                <p className="mt-1 text-body text-ink-muted">From {openingTime()} every morning, with breakfast, lunch and dinner on one menu.</p>
               </li>
               <li className="border-l-2 border-green-deep pl-4">
                 <p className="font-display text-xl font-bold">Made to order</p>
-                <p className="mt-1 text-[0.95rem] text-ink-muted">Juices and smoothies pressed and blended when you order them.</p>
+                <p className="mt-1 text-body text-ink-muted">Juices and smoothies pressed and blended when you order them.</p>
               </li>
               <li className="border-l-2 border-green-deep pl-4">
                 <p className="font-display text-xl font-bold">Something for the table</p>
-                <p className="mt-1 text-[0.95rem] text-ink-muted">Vegan and vegetarian dishes in every section, plus wings, steak and shakes.</p>
+                <p className="mt-1 text-body text-ink-muted">Vegan and vegetarian dishes in every section, plus wings, steak and shakes.</p>
               </li>
               <li className="border-l-2 border-green-deep pl-4">
                 <p className="font-display text-xl font-bold">Pickup and delivery</p>
-                <p className="mt-1 text-[0.95rem] text-ink-muted">Order online for pickup or delivery, or through Uber Eats.</p>
+                <p className="mt-1 text-body text-ink-muted">Order online for pickup or delivery, or through Uber Eats.</p>
               </li>
             </ul>
             <div className="mt-8">
@@ -209,7 +208,7 @@ export default function HomePage() {
       <section className="bg-green-deep text-cream">
         <div className="mx-auto grid max-w-site gap-10 px-4 py-16 sm:px-6 md:grid-cols-12 md:py-20">
           <Reveal className="md:col-span-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-leaf">Find us</p>
+            <Eyebrow tone="dark">Find us</Eyebrow>
             <h2 className="mt-3 font-display text-[2rem] font-bold leading-[1.05] sm:text-[2.6rem] md:text-[2rem] lg:text-[2.6rem]">
               {site.address.street}
               <br />
@@ -223,19 +222,20 @@ export default function HomePage() {
                 Directions
               </ButtonLink>
               {phone && site.phone ? (
-                <a
-                  href={phone}
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-md border-2 border-cream/60 px-5 py-2.5 text-[0.95rem] font-semibold transition-colors hover:border-cream hover:bg-cream hover:text-charcoal"
-                >
+                <ButtonLink href={phone} variant="outline-light">
                   Call {site.phone}
-                </a>
+                </ButtonLink>
               ) : null}
             </div>
           </Reveal>
           <Reveal className="md:col-span-6 md:col-start-7">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-green-leaf">Hours</h3>
+            <Eyebrow as="h3" tone="dark">
+              Hours
+            </Eyebrow>
             <HoursTable tone="dark" className="mt-3 text-base" />
-            <h3 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-green-leaf">Order</h3>
+            <Eyebrow as="h3" tone="dark" className="mt-10">
+              Order
+            </Eyebrow>
             <OrderingLinks tone="dark" className="mt-3" />
           </Reveal>
         </div>
@@ -282,7 +282,7 @@ export default function HomePage() {
       <section className="board text-cream">
         <Reveal className="mx-auto flex max-w-site flex-col gap-8 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between md:py-20">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-leaf">Hungry now</p>
+            <Eyebrow tone="dark">Hungry now</Eyebrow>
             <h2 className="mt-3 font-display text-[2rem] font-bold leading-[1.05] sm:text-[2.6rem] md:text-[3rem]">
               Order ahead, or come sit down.
             </h2>

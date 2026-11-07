@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BrandMark from "@/lib/components/brand-mark";
+import Eyebrow from "@/lib/components/eyebrow";
 import HoursTable from "@/lib/components/hours-table";
 import { directionsUrl, fullAddress, mailHref, openingTime, site, telHref } from "@/lib/site";
 
@@ -25,8 +26,8 @@ export default function Footer() {
               <p className="text-sm text-cream/70">Also known as {site.alternateName}</p>
             </div>
           </div>
-          <p className="mt-5 max-w-sm text-[0.95rem] text-cream/80">{site.tagline}</p>
-          <address className="mt-6 not-italic text-[0.95rem] leading-7 text-cream/85">
+          <p className="mt-5 max-w-sm text-body text-cream/80">{site.tagline}</p>
+          <address className="mt-6 not-italic text-body leading-7 text-cream/85">
             <a href={directionsUrl()} target="_blank" rel="noreferrer" className="hover:text-green-leaf">
               {fullAddress()}
             </a>
@@ -46,19 +47,19 @@ export default function Footer() {
         </div>
 
         <div className="lg:col-span-4">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-green-leaf">Hours</h2>
+          <Eyebrow as="h2" tone="dark">Hours</Eyebrow>
           <HoursTable tone="dark" className="mt-3" />
           <p className="mt-3 text-sm text-cream/60">Breakfast, lunch and dinner from {openingTime()}.</p>
         </div>
 
         <div className="lg:col-span-3">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-green-leaf">Pages</h2>
+          <Eyebrow as="h2" tone="dark">Pages</Eyebrow>
           <ul className="mt-3 flex flex-col">
             {pageLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="inline-flex min-h-[40px] items-center text-[0.95rem] font-medium hover:text-green-leaf"
+                  className="inline-flex min-h-[40px] items-center text-body font-medium hover:text-green-leaf"
                 >
                   {link.label}
                 </Link>
@@ -70,9 +71,9 @@ export default function Footer() {
                   href={order.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-[40px] items-center text-[0.95rem] font-medium hover:text-green-leaf"
+                  className="inline-flex min-h-[40px] items-center text-body font-medium hover:text-green-leaf"
                 >
-                  {order.id === "wix" ? "Pickup and delivery" : order.label}
+                  {order.shortLabel}
                 </a>
               </li>
             ))}

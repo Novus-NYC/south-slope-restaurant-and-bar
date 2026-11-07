@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import BrandMark from "@/lib/components/brand-mark";
 import ButtonLink from "@/lib/components/button-link";
+import Eyebrow from "@/lib/components/eyebrow";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -11,7 +12,7 @@ export default function NotFound() {
   return (
     <section className="mx-auto flex max-w-site flex-col items-start px-4 py-20 sm:px-6 md:py-28">
       <BrandMark className="h-16 w-16 text-green-deep" />
-      <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">404</p>
+      <Eyebrow className="mt-8">404</Eyebrow>
       <h1 className="mt-3 font-display text-[2.6rem] font-bold leading-[0.98] sm:text-6xl">
         That page is not on the menu.
       </h1>
