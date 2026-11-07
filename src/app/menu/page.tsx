@@ -78,7 +78,7 @@ function Category({ category, compact = false }: { category: MenuCategory; compa
         </div>
         <ul
           className={`mt-4 divide-y divide-line md:col-span-8 md:mt-0 lg:col-span-9 ${
-            compact ? "sm:grid sm:grid-cols-2 sm:gap-x-8 sm:divide-y-0" : ""
+            compact ? "sm:grid sm:grid-cols-2 sm:gap-x-8 sm:divide-y-0 sm:[&>li]:border-b sm:[&>li]:border-line" : ""
           }`}
         >
           {category.items.map((item) => (
