@@ -1,8 +1,8 @@
 # South Slope Restaurant & Bar
 
 Website for South Slope Restaurant & Bar (also known as South Slope Eatery), an all day American
-restaurant and bar at 486 5th Avenue, Brooklyn, NY 11215. Breakfast all day, fresh squeezed juices
-and smoothies, wraps, bowls, burgers, entrees and cocktails, with outdoor seating on 5th Avenue.
+restaurant and bar at 486 5th Avenue, Brooklyn, NY 11215. Breakfast, lunch and dinner from 9:00 AM,
+fresh squeezed juices and smoothies, wraps, bowls, burgers, entrees and cocktails.
 
 The site replaces the old Wix site at southslopeeatery486.com. It is a four page, English only site:
 home, the full text menu, about, and contact with hours, directions and ordering links.

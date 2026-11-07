@@ -11,12 +11,12 @@ import {
   type MenuCategory,
   type MenuItem,
 } from "@/lib/menu";
-import { primaryOrder, site, telHref } from "@/lib/site";
+import { openingTime, primaryOrder, site, telHref } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Menu",
   description:
-    "The full menu at South Slope Restaurant & Bar in Park Slope, Brooklyn: breakfast all day, salads, wraps and bowls, sandwiches, burgers, entrees, fresh squeezed juices, smoothies, coffee and cocktails, with prices.",
+    "The full menu at South Slope Restaurant & Bar in Park Slope, Brooklyn: breakfast, lunch and dinner, salads, wraps and bowls, sandwiches, burgers, entrees, fresh squeezed juices, smoothies, coffee and cocktails, with prices.",
   path: "/menu",
 });
 
@@ -102,13 +102,13 @@ export default function MenuPage() {
           <div className="md:col-span-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Menu</p>
             <h1 className="mt-3 font-display text-[2.6rem] font-bold leading-[0.98] sm:text-6xl md:text-7xl">
-              Everything,
+              Breakfast to
               <br />
-              <span className="text-green-deep">all day.</span>
+              <span className="text-green-deep">cocktails.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-ink-muted">
-              Breakfast is served until close. Vegan and vegetarian dishes are marked. Prices are
-              in dollars and can change; tax is not included.
+              Breakfast, lunch and dinner from {openingTime()}, seven days. Vegan and vegetarian
+              dishes are marked. Prices are in dollars and can change; tax is not included.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 md:col-span-4 md:justify-end">

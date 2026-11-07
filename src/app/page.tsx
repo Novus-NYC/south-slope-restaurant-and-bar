@@ -9,7 +9,7 @@ import SectionHeading from "@/lib/components/section-heading";
 import OrderingLinks from "@/lib/components/ordering-links";
 import { pageMetadata } from "@/lib/metadata";
 import { featured, formatPrice, menuItemCount } from "@/lib/menu";
-import { directionsUrl, fullAddress, primaryOrder, site, telHref } from "@/lib/site";
+import { directionsUrl, fullAddress, openingTime, primaryOrder, site, telHref } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: site.name,
@@ -18,14 +18,14 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const tickerItems = [
-  "Breakfast all day",
+  "Breakfast, lunch and dinner",
   "Fresh squeezed juices",
   "Smoothies",
   "Wraps and bowls",
   "Burgers",
   "Entrees",
   "Cocktails",
-  "Outdoor seating",
+  `Open 7 days from ${openingTime()}`,
 ];
 
 export default function HomePage() {
@@ -61,8 +61,8 @@ export default function HomePage() {
             Your all day spot on 5th Avenue.
           </h1>
           <p className="mt-5 max-w-xl text-lg text-cream/90 sm:text-xl">
-            Breakfast all day, fresh squeezed juices and smoothies, burgers and bowls, and a cocktail
-            list for later. Eat in, sit outside, or order to go.
+            Breakfast, lunch and dinner from {openingTime()}. Fresh squeezed juices and smoothies,
+            burgers and bowls, and a cocktail list for later. Eat in or order to go.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href={primaryOrder.href} external variant="leaf">
@@ -100,7 +100,7 @@ export default function HomePage() {
                   Diner classics, <span className="text-green-deep">gone fresh.</span>
                 </>
               }
-              lede={`A bacon, egg and cheese on a waffle. An 8 oz Angus burger. A kale smoothie or a fresh squeezed juice. ${menuItemCount} things on the menu, all made to order.`}
+              lede={`A bacon, egg and cheese on a waffle. An 8 oz Angus burger. A kale smoothie or a fresh squeezed juice. ${menuItemCount} things on the menu.`}
             />
             <div className="relative mt-10 aspect-[16/10] overflow-hidden rounded-md">
               <Image
@@ -167,12 +167,12 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="The block"
               title="Tables on the avenue."
-              lede="Umbrellas, string lights and plants out front on 5th Avenue, under the brownstones. Inside, the bar and the kitchen that does breakfast until close."
+              lede="Umbrellas, string lights and plants under the brownstones on 5th Avenue. Inside, the bar and a kitchen that serves breakfast, lunch and dinner."
             />
             <ul className="mt-8 grid gap-4 sm:grid-cols-2">
               <li className="border-l-2 border-green-deep pl-4">
                 <p className="font-display text-xl font-bold">Open 7 days</p>
-                <p className="mt-1 text-[0.95rem] text-ink-muted">From 9:00 AM every morning. Breakfast is on the menu all day.</p>
+                <p className="mt-1 text-[0.95rem] text-ink-muted">From {openingTime()} every morning, with breakfast, lunch and dinner on one menu.</p>
               </li>
               <li className="border-l-2 border-green-deep pl-4">
                 <p className="font-display text-xl font-bold">Made to order</p>
@@ -277,7 +277,7 @@ export default function HomePage() {
             <h2 className="mt-3 font-display text-[2rem] font-bold leading-[1.05] sm:text-[2.6rem] md:text-[3rem]">
               Order ahead, or come sit down.
             </h2>
-            <p className="mt-3 max-w-lg text-cream/80">{fullAddress()}. Pickup, delivery or a table out front.</p>
+            <p className="mt-3 max-w-lg text-cream/80">{fullAddress()}. Pickup, delivery or a table.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <ButtonLink href={primaryOrder.href} external variant="leaf">

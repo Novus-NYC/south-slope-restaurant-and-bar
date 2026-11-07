@@ -1,7 +1,7 @@
 import Link from "next/link";
 import BrandMark from "@/lib/components/brand-mark";
 import HoursTable from "@/lib/components/hours-table";
-import { directionsUrl, fullAddress, mailHref, site, telHref } from "@/lib/site";
+import { directionsUrl, fullAddress, mailHref, openingTime, site, telHref } from "@/lib/site";
 
 const pageLinks = [
   { href: "/menu", label: "Menu" },
@@ -48,7 +48,7 @@ export default function Footer() {
         <div className="md:col-span-4">
           <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-green-leaf">Hours</h2>
           <HoursTable tone="dark" className="mt-3" />
-          <p className="mt-3 text-sm text-cream/60">Breakfast served all day.</p>
+          <p className="mt-3 text-sm text-cream/60">Breakfast, lunch and dinner from {openingTime()}.</p>
         </div>
 
         <div className="md:col-span-3">

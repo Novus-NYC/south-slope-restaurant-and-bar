@@ -30,7 +30,10 @@ export interface Address {
 
 export interface OrderingLink {
   id: "wix" | "ubereats";
+  /** Button label, for example "Order Online" */
   label: string;
+  /** Label used where the channel is listed next to the other one */
+  shortLabel: string;
   href: string;
   /** Short line shown under the label */
   note: string;
@@ -46,14 +49,41 @@ export interface Review {
 export const siteUrl: string =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://example.com";
 
+/** "9:00 AM" from "09:00". No leading zeroes in visible copy. */
+export function formatTime(hhmm: string): string {
+  const [h, m] = hhmm.split(":").map(Number);
+  const suffix = h >= 12 ? "PM" : "AM";
+  const hour12 = h % 12 === 0 ? 12 : h % 12;
+  return `${hour12}:${m.toString().padStart(2, "0")} ${suffix}`;
+}
+
+const hours: HoursRow[] = [
+  {
+    label: "Mon to Sat",
+    days: ["mon", "tue", "wed", "thu", "fri", "sat"],
+    range: { open: "09:00", close: "21:00" },
+  },
+  { label: "Sun", days: ["sun"], range: { open: "09:00", close: "19:00" } },
+];
+
+/** Earliest opening time in the week, for copy such as "from 9:00 AM". */
+export function openingTime(): string {
+  const opens = hours
+    .map((row) => row.range?.open)
+    .filter((open): open is string => Boolean(open))
+    .sort();
+  return opens.length ? formatTime(opens[0]) : "";
+}
+
 export const site = {
   name: "South Slope Restaurant & Bar",
   shortName: "South Slope",
   alternateName: "South Slope Eatery",
   legalName: null as string | null,
-  tagline: "Breakfast all day, fresh juices and smoothies, burgers and bowls, and a full bar on 5th Avenue.",
-  description:
-    "South Slope Restaurant & Bar (also known as South Slope Eatery) is an all day American restaurant and bar at 486 5th Avenue in Park Slope, Brooklyn. Breakfast all day, fresh squeezed juices, smoothies, wraps, bowls, burgers, entrees and cocktails, with outdoor seating.",
+  // Breakfast hours are not verified beyond "Breakfast and Brunch" tags, so the
+  // copy says what the hours say: three meals from opening time, seven days.
+  tagline: `Breakfast, lunch and dinner from ${openingTime()}, seven days. Fresh squeezed juices and smoothies, burgers and bowls, and a full bar on 5th Avenue.`,
+  description: `South Slope Restaurant & Bar (also known as South Slope Eatery) is an American restaurant and bar at 486 5th Avenue in Park Slope, Brooklyn, open seven days from ${openingTime()}. Breakfast, lunch and dinner, fresh squeezed juices, smoothies, wraps, bowls, burgers, entrees and cocktails.`,
   address: {
     street: "486 5th Avenue",
     neighborhood: "South Slope, Park Slope",
@@ -64,24 +94,19 @@ export const site = {
   } as Address,
   phone: "718-499-0005" as string | null,
   email: "greenkitchen486@gmail.com" as string | null,
-  hours: [
-    {
-      label: "Mon to Sat",
-      days: ["mon", "tue", "wed", "thu", "fri", "sat"],
-      range: { open: "09:00", close: "21:00" },
-    },
-    { label: "Sun", days: ["sun"], range: { open: "09:00", close: "19:00" } },
-  ] as HoursRow[],
+  hours,
   ordering: [
     {
       id: "wix",
       label: "Order Online",
+      shortLabel: "Pickup or delivery",
       href: "https://www.southslopeeatery486.com/online-ordering-1",
       note: "Pickup or delivery, $10 minimum",
     },
     {
       id: "ubereats",
       label: "Uber Eats",
+      shortLabel: "Uber Eats",
       href: "https://www.ubereats.com/store/south-slope-restaurant-%26-bar/L-jzii5-Slq99zAaYMphkA",
       note: "Delivery through Uber Eats",
     },
@@ -146,14 +171,6 @@ export function mailHref(subject?: string, body?: string): string | null {
   if (body) params.set("body", body);
   const query = params.toString().replace(/\+/g, "%20");
   return `mailto:${site.email}${query ? `?${query}` : ""}`;
-}
-
-/** "9:00 AM" from "09:00". No leading zeroes in visible copy. */
-export function formatTime(hhmm: string): string {
-  const [h, m] = hhmm.split(":").map(Number);
-  const suffix = h >= 12 ? "PM" : "AM";
-  const hour12 = h % 12 === 0 ? 12 : h % 12;
-  return `${hour12}:${m.toString().padStart(2, "0")} ${suffix}`;
 }
 
 export function formatRange(range: HoursRange | null): string {

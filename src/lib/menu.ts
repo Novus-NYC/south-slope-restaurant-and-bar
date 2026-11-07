@@ -8,6 +8,8 @@
  * cocktail board image only. Prices are USD.
  */
 
+import { openingTime } from "@/lib/site";
+
 export type DietTag = "vegan" | "vegetarian";
 
 export interface MenuItem {
@@ -254,9 +256,9 @@ const breakfastBites: MenuCategory = {
       name: "Hot Oatmeal",
       description: "Berries +3, banana +1.50.",
       price: 6.95,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
-    { name: "Fresh Fruit Salad", description: "16 oz.", price: 6.95, tags: ["vegan"] },
+    { name: "Fresh Fruit Salad", description: "16 oz.", price: 6.95, tags: ["vegetarian"] },
     { name: "Assorted Muffin", price: 3.95, tags: ["vegetarian"] },
   ],
 };
@@ -370,7 +372,7 @@ const salads: MenuCategory = {
       name: "Primavera Salad",
       description: "Romaine, cherry tomato, cucumber, shredded carrot, avocado, balsamic vinaigrette.",
       price: 12.95,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "Kitchen Chopped Salad",
@@ -475,7 +477,7 @@ const wraps: MenuCategory = {
       name: "Protein Veggie Wrap",
       description: "Steamed brown rice, black beans, avocado, cherry tomato, fresh salsa.",
       price: 12.75,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "California Wrap",
@@ -501,7 +503,7 @@ const wraps: MenuCategory = {
       name: "Tofu Veggie Wrap",
       description: "Stir-fried tofu with sesame seeds, roasted vegetables and sesame ginger dressing.",
       price: 12.95,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
   ],
 };
@@ -535,7 +537,7 @@ const signatureSandwiches: MenuCategory = {
       name: "Vegetarian Pita Sandwich",
       description: "Home-made hummus, tomato, cucumber, avocado and romaine on a whole wheat pita.",
       price: 11.95,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "California Tuna Melt",
@@ -587,7 +589,7 @@ const signatureSandwiches: MenuCategory = {
       name: "Avocado Toast",
       description: "Avocado, red pepper flakes and cilantro on country bread. Two sunny side eggs +2.50.",
       price: 12.95,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "Italiano Panini",
@@ -980,23 +982,23 @@ const sides: MenuCategory = {
   id: "sides",
   name: "Sides",
   items: [
-    { name: "French Fries", price: 6, tags: ["vegan"] },
+    { name: "French Fries", price: 6, tags: ["vegetarian"] },
     { name: "Cheese Fries", price: 8, tags: ["vegetarian"] },
-    { name: "Waffle Fries", price: 7, tags: ["vegan"] },
+    { name: "Waffle Fries", price: 7, tags: ["vegetarian"] },
     { name: "Parmesan-Truffle Fries", price: 8, tags: ["vegetarian"] },
     { name: "Onion Rings", price: 7, tags: ["vegetarian"] },
-    { name: "Sweet Potato Fries", price: 7, tags: ["vegan"] },
-    { name: "Baked Potato", price: 6, tags: ["vegan"] },
+    { name: "Sweet Potato Fries", price: 7, tags: ["vegetarian"] },
+    { name: "Baked Potato", price: 6, tags: ["vegetarian"] },
     { name: "Mashed Potato with Gravy", price: 6 },
-    { name: "Baked Sweet Potato", price: 7, tags: ["vegan"] },
-    { name: "Steamed Brown Rice", price: 5, tags: ["vegan"] },
-    { name: "Seasoned Rice", price: 5, tags: ["vegan"] },
-    { name: "Organic Quinoa", price: 5, tags: ["vegan"] },
-    { name: "Sautéed Spinach", price: 7.5, tags: ["vegan"] },
-    { name: "Sautéed Broccoli", price: 7.5, tags: ["vegan"] },
-    { name: "Steamed Mixed Veggies", price: 6.5, tags: ["vegan"] },
-    { name: "Steamed Broccoli", price: 6.5, tags: ["vegan"] },
-    { name: "Half Avocado", price: 4, tags: ["vegan"] },
+    { name: "Baked Sweet Potato", price: 7, tags: ["vegetarian"] },
+    { name: "Steamed Brown Rice", price: 5, tags: ["vegetarian"] },
+    { name: "Seasoned Rice", price: 5 },
+    { name: "Organic Quinoa", price: 5, tags: ["vegetarian"] },
+    { name: "Sautéed Spinach", price: 7.5, tags: ["vegetarian"] },
+    { name: "Sautéed Broccoli", price: 7.5, tags: ["vegetarian"] },
+    { name: "Steamed Mixed Veggies", price: 6.5, tags: ["vegetarian"] },
+    { name: "Steamed Broccoli", price: 6.5, tags: ["vegetarian"] },
+    { name: "Half Avocado", price: 4, tags: ["vegetarian"] },
   ],
 };
 
@@ -1006,7 +1008,7 @@ const soups: MenuCategory = {
   notes: ["16 oz $6.50. 32 oz +5.50."],
   items: [
     { name: "Chicken and Rice", price: 6.5 },
-    { name: "Spinach Lentil", price: 6.5, tags: ["vegan"] },
+    { name: "Spinach Lentil", price: 6.5 },
     { name: "Chicken Noodle", price: 6.5 },
   ],
 };
@@ -1038,17 +1040,17 @@ const juices: MenuCategory = {
   name: "Fresh Squeezed Juices",
   notes: ["16 oz $6.95. 20 oz +1.80. 24 oz +3.55."],
   items: [
-    { name: "Iron Man", description: "Green apple, lemon, carrot, beets, ginger.", price: 6.95, tags: ["vegan"] },
-    { name: "Kitchen King", description: "Spinach, parsley, carrot, green apple, celery.", price: 6.95, tags: ["vegan"] },
-    { name: "Flu Fighter", description: "Grapefruit, lemon, orange, ginger, cayenne pepper.", price: 6.95, tags: ["vegan"] },
-    { name: "Simply Green", description: "Spinach, parsley, cucumber, celery.", price: 6.95, tags: ["vegan"] },
-    { name: "Morning Booster", description: "Cucumber, ginger, carrot, orange.", price: 6.95, tags: ["vegan"] },
-    { name: "Weightloss", description: "Grapefruit, spinach, green apple, celery.", price: 6.95, tags: ["vegan"] },
-    { name: "Adrenaline", description: "Celery, spinach, carrot, green apple.", price: 6.95, tags: ["vegan"] },
-    { name: "Muscle Recovery", description: "Carrot, orange, spinach, cantaloupe.", price: 6.95, tags: ["vegan"] },
-    { name: "Detox", description: "Beets, cucumbers, spinach, carrot.", price: 6.95, tags: ["vegan"] },
-    { name: "Revitalize", description: "Carrot, green apple, orange.", price: 6.95, tags: ["vegan"] },
-    { name: "Fresh Squeezed Orange Juice or Carrot Juice", price: 6.95, tags: ["vegan"] },
+    { name: "Iron Man", description: "Green apple, lemon, carrot, beets, ginger.", price: 6.95 },
+    { name: "Kitchen King", description: "Spinach, parsley, carrot, green apple, celery.", price: 6.95 },
+    { name: "Flu Fighter", description: "Grapefruit, lemon, orange, ginger, cayenne pepper.", price: 6.95 },
+    { name: "Simply Green", description: "Spinach, parsley, cucumber, celery.", price: 6.95 },
+    { name: "Morning Booster", description: "Cucumber, ginger, carrot, orange.", price: 6.95 },
+    { name: "Weightloss", description: "Grapefruit, spinach, green apple, celery.", price: 6.95 },
+    { name: "Adrenaline", description: "Celery, spinach, carrot, green apple.", price: 6.95 },
+    { name: "Muscle Recovery", description: "Carrot, orange, spinach, cantaloupe.", price: 6.95 },
+    { name: "Detox", description: "Beets, cucumbers, spinach, carrot.", price: 6.95 },
+    { name: "Revitalize", description: "Carrot, green apple, orange.", price: 6.95 },
+    { name: "Fresh Squeezed Orange Juice or Carrot Juice", price: 6.95 },
   ],
 };
 
@@ -1072,7 +1074,7 @@ const smoothies: MenuCategory = {
       price: 6.5,
       tags: ["vegetarian"],
     },
-    { name: "Smurf", description: "Blueberry, mango, fresh lemonade.", price: 6.5, tags: ["vegan"] },
+    { name: "Smurf", description: "Blueberry, mango, fresh lemonade.", price: 6.5, tags: ["vegetarian"] },
     {
       name: "Tropical Breeze",
       description: "Mango, pineapple, honey and pineapple juice.",
@@ -1083,7 +1085,7 @@ const smoothies: MenuCategory = {
       name: "Very Berry",
       description: "Blueberry, strawberry, raspberry and apple juice.",
       price: 6.5,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "Kindergarten",
@@ -1095,7 +1097,7 @@ const smoothies: MenuCategory = {
       name: "Mango Tango",
       description: "Mango, pineapple, strawberry and orange juice.",
       price: 6.5,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "Green Giant",
@@ -1103,12 +1105,12 @@ const smoothies: MenuCategory = {
       price: 6.5,
       tags: ["vegetarian"],
     },
-    { name: "Peach Passion", description: "Peach, raspberry and mango juice.", price: 6.5, tags: ["vegan"] },
+    { name: "Peach Passion", description: "Peach, raspberry and mango juice.", price: 6.5, tags: ["vegetarian"] },
     {
       name: "Maui Maui",
       description: "Banana, strawberry, pineapple juice and coconut milk.",
       price: 6.5,
-      tags: ["vegan"],
+      tags: ["vegetarian"],
     },
     {
       name: "Oat of this World",
@@ -1220,11 +1222,7 @@ export const seasonal: MenuCategory = {
       description: "Seven wings, seven mozzarella sticks and seven chicken tenders.",
       price: 37.95,
     },
-    {
-      name: "50 Wings",
-      description: "Buffalo, spicy BBQ or teriyaki.",
-      price: 75.95,
-    },
+    { name: "50 Wings", price: 75.95 },
     {
       name: "Party Platter",
       description: "20 wings, fries, ranch, blue cheese, carrots and celery.",
@@ -1241,7 +1239,7 @@ export const menuSections: MenuSection[] = [
   {
     id: "breakfast",
     name: "Breakfast",
-    blurb: "Served all day, every day. Eggs, omelettes, stacks and sandwiches.",
+    blurb: `Eggs, omelettes, stacks and sandwiches, from ${openingTime()}.`,
     categories: [eggs, pancakes, breakfastSandwiches, breakfastBites],
   },
   {
@@ -1286,7 +1284,7 @@ export function findItem(categoryId: string, name: string): MenuItem {
 export const featured = [
   {
     item: findItem("breakfast-sandwiches", "Slope BEC"),
-    category: "Breakfast all day",
+    category: "Breakfast",
     href: "/menu#breakfast-sandwiches",
   },
   {

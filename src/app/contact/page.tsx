@@ -6,7 +6,7 @@ import OrderingLinks from "@/lib/components/ordering-links";
 import Reveal from "@/lib/components/reveal";
 import SectionHeading from "@/lib/components/section-heading";
 import { pageMetadata } from "@/lib/metadata";
-import { directionsUrl, fullAddress, mailHref, site, telHref } from "@/lib/site";
+import { directionsUrl, fullAddress, mailHref, openingTime, site, telHref } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact and Hours",
@@ -25,7 +25,7 @@ export default function ContactPage() {
           as="h1"
           eyebrow="Contact"
           title="Come by, call, or order ahead."
-          lede="We are on 5th Avenue in South Slope, open seven days a week from 9:00 AM."
+          lede={`We are on 5th Avenue in South Slope, open seven days a week from ${openingTime()}.`}
         />
       </section>
 
@@ -72,7 +72,7 @@ export default function ContactPage() {
 
             <h2 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-green-deep">Hours</h2>
             <HoursTable className="mt-3 max-w-sm text-base" />
-            <p className="mt-3 text-sm text-ink-muted">Breakfast served all day. Holiday hours may differ; call ahead.</p>
+            <p className="mt-3 text-sm text-ink-muted">Holiday hours may differ; call ahead.</p>
           </Reveal>
 
           {/* Order and message */}

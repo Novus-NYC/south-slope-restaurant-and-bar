@@ -76,7 +76,7 @@ export default async function OpenGraphImage() {
           }}
         >
           <div style={{ display: "flex" }}>{fullAddress()}</div>
-          <div style={{ display: "flex" }}>{hoursSummary()}. Breakfast all day.</div>
+          <div style={{ display: "flex" }}>{hoursSummary()}</div>
         </div>
       </div>
     ),

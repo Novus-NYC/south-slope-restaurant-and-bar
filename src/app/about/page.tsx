@@ -5,12 +5,11 @@ import Reveal from "@/lib/components/reveal";
 import SectionHeading from "@/lib/components/section-heading";
 import { pageMetadata } from "@/lib/metadata";
 import { allCategories } from "@/lib/menu";
-import { fullAddress, site } from "@/lib/site";
+import { fullAddress, openingTime, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
-  description:
-    "South Slope Restaurant & Bar, also known as South Slope Eatery, is an all day American restaurant and bar at 486 5th Avenue in Park Slope, Brooklyn, with outdoor seating, breakfast all day and a full cocktail list.",
+  description: `South Slope Restaurant & Bar, also known as South Slope Eatery, is an American restaurant and bar at 486 5th Avenue in Park Slope, Brooklyn: breakfast, lunch and dinner from ${openingTime()}, fresh squeezed juices and a full cocktail list.`,
   path: "/about",
 });
 
@@ -28,8 +27,8 @@ export default function AboutPage() {
           lede={
             <>
               {site.name}, also known as {site.alternateName}, is the all day restaurant and bar at{" "}
-              {fullAddress()}. Diner breakfast until close, fresh squeezed juice, grain bowls, a
-              burger bar, plated entrees and cocktails, all from one kitchen in South Slope.
+              {fullAddress()}. Diner breakfast from {openingTime()}, fresh squeezed juice, grain
+              bowls, a burger bar, plated entrees and cocktails, all from one kitchen in South Slope.
             </>
           }
         />
@@ -88,12 +87,12 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Outside"
               title="Umbrellas on the avenue."
-              lede="The sidewalk setup out front has wooden tables, umbrellas, string lights and plants, facing the brownstones across 5th Avenue. It is the best seat in the house when the weather allows."
+              lede="Pictured: the setup out front, with wooden tables, umbrellas, string lights and plants facing the brownstones across 5th Avenue. Ask about a table outside when the weather is good."
             />
             <p className="mt-6 text-ink-muted">
-              Inside, the black awning with the rooster weathervane marks the door at 486. The
-              chalkboard out front says it plainly: breakfast, lunch, dinner, juices and smoothies,
-              made fresh to order, 7 days.
+              Above the door, the black awning carries the rooster weathervane and the number 486.
+              The chalkboard out front says it plainly: breakfast, lunch, dinner, juices and
+              smoothies, made fresh to order, 7 days.
             </p>
           </Reveal>
           <Reveal variant="scale" className="relative aspect-[4/5] overflow-hidden rounded-md md:col-span-5 md:col-start-8">
@@ -161,12 +160,12 @@ export default function AboutPage() {
             <p>
               5th Avenue runs the length of Park Slope, and the South Slope stretch is its
               everyday main street. The restaurant sits at 486, with
-              breakfast from 9:00 AM seven days a week, lunch and dinner through the evening, and
-              pickup and delivery when you would rather stay in.
+              breakfast from {openingTime()} seven days a week, lunch and dinner through the evening,
+              and pickup and delivery when you would rather stay in.
             </p>
             <p className="text-ink-muted">
-              Longtime customers may know the place as {site.alternateName}. Same address, same
-              kitchen, same rooster on the awning.
+              The awning still reads {site.alternateName}, and you will see both names online. Same
+              address, same kitchen, same rooster.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <ButtonLink href="/contact">Hours and directions</ButtonLink>
