@@ -4,8 +4,21 @@
 
 :root {
   --header-h: 4.5rem;
+  /* Menu category bar: one scrolling row below md, wrapped rows from md up.
+     The bar measures itself and overwrites --jump-h once JavaScript runs;
+     these are the no-JS fallbacks. */
   --jump-h: 3.25rem;
+  /* Focus ring: deep green outline with a canvas-colored inner halo on
+     light surfaces; dark surfaces swap both (see below). */
+  --focus-ring: #0b5d3b;
+  --focus-halo: #f6f1e6;
   color-scheme: light;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --jump-h: 6.5rem;
+  }
 }
 
 html {
@@ -55,9 +68,17 @@ body.menu-open {
   letter-spacing: -0.015em;
 }
 
+.board,
+.bg-green-deep,
+#mobile-menu {
+  --focus-ring: #4cc96a;
+  --focus-halo: #1b1b19;
+}
+
 :focus-visible {
-  outline: 3px solid #4cc96a;
-  outline-offset: 3px;
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--focus-halo);
 }
 
 /* Scroll reveals. Hidden only when JavaScript is running (html.js). */

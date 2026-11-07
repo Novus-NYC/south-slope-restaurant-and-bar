@@ -76,14 +76,17 @@ export default function HomePage() {
       </section>
 
       {/* Chalkboard ticker: the brand cue from the restaurant's own boards. */}
-      <section className="board overflow-hidden border-y border-cream/10 py-3 text-green-leaf" aria-label="What we serve">
-        <ul className="mx-auto flex max-w-site flex-wrap justify-center gap-x-6 gap-y-1 px-4 text-xs font-bold uppercase tracking-[0.18em] sm:px-6 sm:text-[0.8rem]">
-          {tickerItems.map((item) => (
-            <li key={item} className="flex items-center gap-6">
+      <section className="board border-y border-cream/10 py-3 text-green-leaf" aria-label="What we serve">
+        {/* One scrolling line on phones, a centered wrapped row from sm up. */}
+        <ul className="scrollbar-none mx-auto flex max-w-site flex-nowrap gap-x-6 overflow-x-auto px-4 text-[0.8rem] font-bold uppercase tracking-[0.18em] sm:flex-wrap sm:justify-center sm:gap-y-1 sm:overflow-visible sm:px-6">
+          {tickerItems.map((item, index) => (
+            <li key={item} className="flex shrink-0 items-center gap-6 whitespace-nowrap">
               {item}
-              <span aria-hidden="true" className="text-cream/30">
-                •
-              </span>
+              {index < tickerItems.length - 1 ? (
+                <span aria-hidden="true" className="text-cream/30">
+                  •
+                </span>
+              ) : null}
             </li>
           ))}
         </ul>
@@ -118,8 +121,11 @@ export default function HomePage() {
               <li key={item.name} className="border-t border-line py-5 first:border-t-2 first:border-charcoal last:border-b">
                 <Link href={href} className="group block rounded-md">
                   <div className="flex items-baseline gap-4">
-                    <span className="font-display text-sm font-semibold tabular-nums text-green-deep">
-                      {String(index + 1).padStart(2, "0")}
+                    <span
+                      aria-hidden="true"
+                      className="w-4 font-display text-sm font-semibold tabular-nums text-green-deep"
+                    >
+                      {index + 1}
                     </span>
                     <span className="flex-1 font-display text-2xl font-bold leading-tight group-hover:text-green-deep sm:text-[1.75rem]">
                       {item.name}
@@ -154,13 +160,16 @@ export default function HomePage() {
       {/* Outside on 5th Avenue */}
       <section className="bg-cream-deep">
         <div className="mx-auto grid max-w-site gap-10 px-4 py-16 sm:px-6 md:grid-cols-12 md:items-center md:py-24">
-          <Reveal variant="scale" className="relative aspect-[4/5] overflow-hidden rounded-md md:col-span-5 md:aspect-[3/4]">
+          <Reveal variant="scale" className="relative aspect-[4/5] overflow-hidden rounded-md md:col-span-5">
+            {/* The source carries a baked-in white frame; the scale and origin
+                push it outside the crop while keeping "486" and the phone
+                number on the awning whole. See BUILD_NOTES. */}
             <Image
               src="/images/storefront-486-5th-avenue.jpeg"
               alt="The storefront at 486 5th Avenue: a black awning with the South Slope rooster logo under a red brick facade, with a chalkboard sign out front"
               fill
               sizes="(min-width: 768px) 40vw, 100vw"
-              className="object-cover"
+              className="origin-[56%_50%] scale-[1.07] object-cover"
             />
           </Reveal>
           <Reveal className="md:col-span-6 md:col-start-7">
@@ -201,7 +210,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-site gap-10 px-4 py-16 sm:px-6 md:grid-cols-12 md:py-20">
           <Reveal className="md:col-span-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-leaf">Find us</p>
-            <h2 className="mt-3 font-display text-[2rem] font-bold leading-[1.05] sm:text-[2.6rem]">
+            <h2 className="mt-3 font-display text-[2rem] font-bold leading-[1.05] sm:text-[2.6rem] md:text-[2rem] lg:text-[2.6rem]">
               {site.address.street}
               <br />
               <span className="text-cream/80">

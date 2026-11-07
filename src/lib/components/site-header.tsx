@@ -18,12 +18,15 @@ export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const returnFocus = useRef(false);
   const pathname = usePathname();
   const phone = telHref();
 
-  const close = useCallback((returnFocus = true) => {
+  // Focus goes back to the toggle from the effect below, after the rest of
+  // the page has stopped being inert; an inert button cannot take focus.
+  const close = useCallback((shouldReturnFocus = true) => {
+    returnFocus.current = shouldReturnFocus;
     setOpen(false);
-    if (returnFocus) toggleRef.current?.focus();
   }, []);
 
   // Surface change once content scrolls underneath the header.
@@ -34,14 +37,25 @@ export default function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Body scroll lock, focus into the panel, Escape to close, close on resize.
+  // Body scroll lock, focus into the panel, everything else inert so Tab
+  // cannot leave the dialog, Escape to close, close on resize.
   useEffect(() => {
     if (!open) {
       document.body.classList.remove("menu-open");
+      if (returnFocus.current) {
+        returnFocus.current = false;
+        toggleRef.current?.focus();
+      }
       return;
     }
     document.body.classList.add("menu-open");
     closeRef.current?.focus();
+
+    // Skip link, header, main and footer are all direct children of body.
+    const others = Array.from(document.body.children).filter(
+      (el) => el.id !== "mobile-menu" && !el.hasAttribute("inert"),
+    );
+    for (const el of others) el.setAttribute("inert", "");
 
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") close();
@@ -55,6 +69,7 @@ export default function SiteHeader() {
     return () => {
       document.removeEventListener("keydown", onKey);
       media.removeEventListener("change", onMedia);
+      for (const el of others) el.removeAttribute("inert");
       document.body.classList.remove("menu-open");
     };
   }, [open, close]);
@@ -110,6 +125,7 @@ export default function SiteHeader() {
             </ButtonLink>
           </nav>
 
+          {/* Not labelled "Menu": on a restaurant site that means the food. */}
           <button
             ref={toggleRef}
             type="button"
@@ -118,7 +134,7 @@ export default function SiteHeader() {
             aria-controls="mobile-menu"
             onClick={() => setOpen(true)}
           >
-            <span>Menu</span>
+            <span>Pages</span>
             <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none">
               <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
             </svg>
@@ -132,7 +148,7 @@ export default function SiteHeader() {
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
-        aria-label="Site menu"
+        aria-label="Site navigation"
         inert={!open}
         className={`board fixed inset-0 z-50 flex flex-col text-cream transition-[opacity,transform] duration-300 md:hidden ${
           open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"

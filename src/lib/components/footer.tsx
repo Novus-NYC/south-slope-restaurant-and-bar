@@ -16,8 +16,8 @@ export default function Footer() {
 
   return (
     <footer className="board mt-auto text-cream">
-      <div className="mx-auto grid max-w-site gap-10 px-4 py-14 sm:px-6 md:grid-cols-12 md:gap-8">
-        <div className="md:col-span-5">
+      <div className="mx-auto grid max-w-site gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 md:gap-8 lg:grid-cols-12">
+        <div className="md:col-span-2 lg:col-span-5">
           <div className="flex items-center gap-3">
             <BrandMark className="h-12 w-12 text-green-leaf" />
             <div className="leading-tight">
@@ -45,13 +45,13 @@ export default function Footer() {
           </address>
         </div>
 
-        <div className="md:col-span-4">
+        <div className="lg:col-span-4">
           <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-green-leaf">Hours</h2>
           <HoursTable tone="dark" className="mt-3" />
           <p className="mt-3 text-sm text-cream/60">Breakfast, lunch and dinner from {openingTime()}.</p>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="lg:col-span-3">
           <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-green-leaf">Pages</h2>
           <ul className="mt-3 flex flex-col">
             {pageLinks.map((link) => (

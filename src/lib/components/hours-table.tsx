@@ -14,10 +14,12 @@ export default function HoursTable({ tone = "light", className = "" }: HoursTabl
       <tbody>
         {site.hours.map((row) => (
           <tr key={row.label} className={`border-b ${border}`}>
-            <th scope="row" className={`py-2 pr-4 text-left font-medium ${muted}`}>
+            <th scope="row" className={`whitespace-nowrap py-2 pr-4 text-left font-medium ${muted}`}>
               {row.label}
             </th>
-            <td className="py-2 text-right font-semibold tabular-nums">{formatRange(row.range)}</td>
+            <td className="whitespace-nowrap py-2 text-right font-semibold tabular-nums">
+              {formatRange(row.range)}
+            </td>
           </tr>
         ))}
       </tbody>

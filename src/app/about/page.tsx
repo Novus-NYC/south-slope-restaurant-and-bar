@@ -101,7 +101,7 @@ export default function AboutPage() {
               alt="The black awning reading South Slope Eatery with the rooster logo, red brick above and a chalkboard sign on the sidewalk"
               fill
               sizes="(min-width: 768px) 40vw, 100vw"
-              className="object-cover"
+              className="origin-[56%_50%] scale-[1.07] object-cover"
             />
           </Reveal>
         </div>
@@ -110,13 +110,17 @@ export default function AboutPage() {
       {/* Bar */}
       <section className="board text-cream">
         <div className="mx-auto grid max-w-site gap-10 px-4 py-16 sm:px-6 md:grid-cols-12 md:items-center md:py-24">
-          <Reveal variant="scale" className="relative aspect-[4/3] overflow-hidden rounded-md md:col-span-5">
+          <Reveal variant="scale" className="relative aspect-[3/2] overflow-hidden rounded-md md:col-span-5">
+            {/* The board image has white margins down both sides and a script
+                title across the top. The scale hides the margins and the
+                position starts the crop under the title, on the first rows of
+                glasses, ending between two rows of labels. */}
             <Image
               src="/images/cocktail-board.jpg"
               alt="The cocktail board: a frozen margarita, a Bulldog with an upturned bottle, a blue Hawaiian and a mojito photographed on black"
               fill
               sizes="(min-width: 768px) 40vw, 100vw"
-              className="object-cover object-[50%_18%]"
+              className="scale-[1.275] object-cover object-[50%_16%]"
             />
           </Reveal>
           <Reveal className="md:col-span-6 md:col-start-7">

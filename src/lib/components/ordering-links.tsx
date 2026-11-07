@@ -12,7 +12,7 @@ export default function OrderingLinks({ tone = "light", className = "" }: Orderi
       : "border-line bg-white hover:border-green-deep";
   const note = tone === "dark" ? "text-cream/70" : "text-ink-muted";
   return (
-    <ul className={`grid gap-3 sm:grid-cols-2 ${className}`}>
+    <ul className={`grid gap-3 lg:grid-cols-2 ${className}`}>
       {site.ordering.map((order) => (
         <li key={order.id}>
           <a

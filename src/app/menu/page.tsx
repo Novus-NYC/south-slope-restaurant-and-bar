@@ -27,7 +27,7 @@ function Tags({ item }: { item: MenuItem }) {
       {item.tags.map((tag) => (
         <span
           key={tag}
-          className="inline-flex items-center rounded-sm border border-green-deep/40 bg-green-pale px-1.5 py-px text-[0.68rem] font-bold uppercase tracking-[0.12em] text-green-deeper"
+          className="inline-flex items-center rounded-sm border border-green-deep/40 bg-green-pale px-1.5 py-px text-xs font-bold uppercase tracking-[0.08em] text-green-deeper"
         >
           {dietTagLabel[tag]}
         </span>
@@ -36,14 +36,14 @@ function Tags({ item }: { item: MenuItem }) {
   );
 }
 
-function Item({ item }: { item: MenuItem }) {
+function Item({ item, headingLevel: Heading = "h4" }: { item: MenuItem; headingLevel?: "h3" | "h4" }) {
   return (
     <li className="py-3">
       <div className="flex items-baseline gap-3">
-        <h4 className="flex-1 text-[1.02rem] font-semibold leading-snug">
+        <Heading className="flex-1 text-[1.02rem] font-semibold leading-snug">
           {item.name}
           <Tags item={item} />
-        </h4>
+        </Heading>
         {item.price !== undefined ? (
           <p className="shrink-0 text-right font-display text-[1.05rem] font-semibold tabular-nums">
             {formatPrice(item.price)}
@@ -163,8 +163,9 @@ export default function MenuPage() {
                 ))}
               </div>
               <ul className="mt-4 divide-y divide-line md:col-span-8 md:mt-0 lg:col-span-9">
+                {/* The block title is an h2, so items sit one level down. */}
                 {seasonal.items.map((item) => (
-                  <Item key={item.name} item={item} />
+                  <Item key={item.name} item={item} headingLevel="h3" />
                 ))}
               </ul>
             </div>

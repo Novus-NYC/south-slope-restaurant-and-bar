@@ -9,11 +9,13 @@ interface Errors {
 }
 
 const field =
-  "mt-1.5 w-full rounded-md border-2 border-line bg-white px-3.5 py-2.5 text-[0.95rem] text-ink placeholder:text-ink-muted/70 focus:border-green-deep focus:outline-none";
+  "mt-1.5 w-full rounded-md border-2 border-line bg-white px-3.5 py-2.5 text-[0.95rem] text-ink placeholder:text-ink-muted/70 focus:border-green-deep focus:shadow-none focus:outline-none";
 
 /**
  * Short message form that opens the visitor's mail app with the message
- * prefilled (mailto). No data is sent anywhere else.
+ * prefilled (mailto). No data is sent anywhere else. Without JavaScript the
+ * form posts straight to the mailto: address as plain text, so it still
+ * opens the mail app with the fields in the body.
  */
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -46,7 +48,13 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
+    <form
+      onSubmit={onSubmit}
+      action={mailHref() ?? undefined}
+      method="post"
+      encType="text/plain"
+      className="flex flex-col gap-4"
+    >
       <div>
         <label htmlFor="cf-name" className="text-sm font-semibold">
           Name <span className="text-green-deep">(required)</span>
