@@ -2,11 +2,156 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+:root {
+  --header-h: 4.5rem;
+  --jump-h: 3.25rem;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* One anchor offset for the whole site: the sticky header height. */
+  scroll-padding-top: var(--header-h);
+}
+
+/* The menu page adds its sticky category bar under the header. */
+html:has(#menu-jump-bar) {
+  scroll-padding-top: calc(var(--header-h) + var(--jump-h));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
   padding: 0;
   margin: 0;
 }
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  @apply bg-cream text-ink font-sans antialiased;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+::selection {
+  background: #4cc96a;
+  color: #1b1b19;
+}
+
+.font-display {
+  font-variation-settings: "SOFT" 60, "WONK" 1;
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 3px solid #4cc96a;
+  outline-offset: 3px;
+}
+
+/* Scroll reveals. Hidden only when JavaScript is running (html.js). */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 550ms ease,
+    transform 550ms ease;
+}
+
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal-scale {
+  opacity: 0;
+  transform: scale(0.985);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+}
+
+html.js .reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease;
+}
+
+html.js .reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal-stagger.is-visible > :nth-child(2) {
+  transition-delay: 70ms;
+}
+html.js .reveal-stagger.is-visible > :nth-child(3) {
+  transition-delay: 140ms;
+}
+html.js .reveal-stagger.is-visible > :nth-child(4) {
+  transition-delay: 210ms;
+}
+html.js .reveal-stagger.is-visible > :nth-child(5) {
+  transition-delay: 280ms;
+}
+html.js .reveal-stagger.is-visible > :nth-child(n + 6) {
+  transition-delay: 350ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal,
+  html.js .reveal-scale,
+  html.js .reveal-stagger > *,
+  html.js .reveal-stagger.is-visible > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms;
+  }
+}
+
+@media print {
+  html.js .reveal,
+  html.js .reveal-scale,
+  html.js .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Horizontal jump bar: hide the scrollbar but keep it scrollable. */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Chalkboard texture used on dark bands: a faint diagonal hatch, no images. */
+.board {
+  background-color: #1b1b19;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.025) 0 2px,
+    transparent 2px 9px
+  );
 }
