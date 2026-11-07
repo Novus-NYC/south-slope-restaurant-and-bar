@@ -4,7 +4,8 @@
 
 :root {
   --header-h: 4.5rem;
-  /* Menu category bar: one scrolling row below md, wrapped rows from md up.
+  /* Menu category bar: one sticky scrolling row below lg; from lg up it is a
+     static wrapped index at the top of the menu, so it adds no offset there.
      The bar measures itself and overwrites --jump-h once JavaScript runs;
      these are the no-JS fallbacks. */
   --jump-h: 3.25rem;
@@ -17,7 +18,7 @@
 
 @media (min-width: 1024px) {
   :root {
-    --jump-h: 6.5rem;
+    --jump-h: 0px;
   }
 }
 

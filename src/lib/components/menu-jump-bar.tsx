@@ -25,12 +25,19 @@ export default function MenuJumpBar({ sections }: MenuJumpBarProps) {
     const nav = navRef.current;
     if (!nav) return;
     const root = document.documentElement;
-    const measure = () => root.style.setProperty("--jump-h", `${nav.offsetHeight}px`);
+    // The bar only takes space under the header while it is sticky (below lg);
+    // on desktop the wrapped index is static, so the offset is the header alone.
+    const measure = () => {
+      const sticky = getComputedStyle(nav).position === "sticky";
+      root.style.setProperty("--jump-h", sticky ? `${nav.offsetHeight}px` : "0px");
+    };
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(nav);
+    window.addEventListener("resize", measure);
     return () => {
       observer.disconnect();
+      window.removeEventListener("resize", measure);
       root.style.removeProperty("--jump-h");
     };
   }, []);
@@ -82,7 +89,7 @@ export default function MenuJumpBar({ sections }: MenuJumpBarProps) {
       ref={navRef}
       id="menu-jump-bar"
       aria-label="Menu categories"
-      className="sticky top-[var(--header-h)] z-30 border-b border-line bg-cream"
+      className="sticky top-[var(--header-h)] z-30 border-b border-line bg-cream lg:static"
     >
       <div
         ref={barRef}
