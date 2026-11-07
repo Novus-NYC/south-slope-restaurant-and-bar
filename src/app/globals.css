@@ -96,6 +96,12 @@ html.js .reveal.is-visible {
   transform: none;
 }
 
+/* Anchor targets fade in without moving, so a hash jump lands exactly under
+   the sticky bars instead of 14px high once the reveal settles. */
+html.js .reveal[id] {
+  transform: none;
+}
+
 html.js .reveal-scale {
   opacity: 0;
   transform: scale(0.985);
