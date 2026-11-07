@@ -15,7 +15,7 @@
   color-scheme: light;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   :root {
     --jump-h: 6.5rem;
   }

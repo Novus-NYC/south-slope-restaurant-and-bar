@@ -73,7 +73,7 @@ everywhere.
   four plain facts, green hours and address block with directions, call and both ordering links,
   the Uber Eats 4.8 with two attributed quotes, closing CTA band.
 - `/menu`: 22 categories in three parts (Breakfast; Lunch & Dinner; Drinks & Bar), a sticky category
-  jump bar under the header (one scrolling row below 768 px, wrapped rows from 768 px up, 44 px
+  jump bar under the header (one scrolling row below 1024 px, wrapped rows from 1024 px up, 44 px
   targets, active chip tracks the scroll position, the bar writes its measured height into
   `--jump-h`), category notes beside each list, vegan and vegetarian text badges, prices right aligned
   with `flex` so they survive 390 px, two-column layout for short lists, a "Seasonal and party
@@ -121,7 +121,7 @@ everywhere.
   Cheese", "Huevos Ala Mexicana", "Penne Ala Vodka" kept as the restaurant writes them.
 - Anchor offset: one `scroll-padding-top` on `html` equal to the header height; on the menu page it
   grows by the jump bar height through `html:has(#menu-jump-bar)`. No per-section `scroll-margin`.
-  `--jump-h` has CSS fallbacks (3.25rem, 6.5rem from 768 px) and the bar overwrites it with its
+  `--jump-h` has CSS fallbacks (3.25rem, 6.5rem from 1024 px) and the bar overwrites it with its
   measured height once JavaScript runs, so the offset stays right when the chips wrap.
 - Focus ring: a 3 px deep green outline with a 2 px cream inner halo on light surfaces; `.board`,
   `.bg-green-deep` and the mobile dialog swap to leaf green on charcoal. Both pass 3:1 against
@@ -358,7 +358,7 @@ A reviewer checked the site against AGENTS.md after the first build. What change
   to `mailto:` without JavaScript and native validation is back.
 - Layout: hours cells never wrap; the footer is two columns at 768 px and twelve at 1024 px;
   ordering cards stack until 1024 px; the Find us address steps down at 768 px; the menu category
-  bar wraps from 768 px with a measured height; the ticker is one scrolling line on phones with
+  bar wraps from 1024 px with a measured height (one scrolling row on phones and tablets); the ticker is one scrolling line on phones with
   no trailing bullet; the storefront and cocktail board crops are described in section 4.
 - Code: `fontSize.body` and `fontSize.eyebrow` / `letterSpacing.eyebrow` tokens replace
   `text-[0.95rem]` and the five tracking variants; one `Eyebrow` component renders every section

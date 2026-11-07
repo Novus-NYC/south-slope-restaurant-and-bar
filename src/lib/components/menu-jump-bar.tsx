@@ -86,7 +86,7 @@ export default function MenuJumpBar({ sections }: MenuJumpBarProps) {
     >
       <div
         ref={barRef}
-        className="scrollbar-none mx-auto flex h-[3.25rem] max-w-site items-center gap-x-1 overflow-x-auto px-4 sm:px-6 md:h-auto md:flex-wrap md:overflow-visible md:py-1.5"
+        className="scrollbar-none mx-auto flex h-[3.25rem] max-w-site items-center gap-x-1 overflow-x-auto px-4 sm:px-6 lg:h-auto lg:flex-wrap lg:overflow-visible lg:py-1.5"
       >
         {sections.map((section, sectionIndex) => (
           <Fragment key={section.id}>
